@@ -8,7 +8,7 @@
     typedef void* Message;
 
     struct message {
-        // EscapeCQText escapes special characters in a non-media plain message.\
+        // EscapeCQText escapes special characters in a non-media plain message.
         //
         // CQ码字符转换
         string(*EscapeCQText)(string);

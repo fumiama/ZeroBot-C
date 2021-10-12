@@ -16,8 +16,6 @@
 
         // GetMatcher ...
         Matcher*(*GetMatcher)();
-        // CheckSession 判断会话连续性
-        Rule(*CheckSession)();
         // Send 快捷发送消息
         int64_t(*Send)(Message);
         // SendChain 快捷发送消息-消息链
@@ -37,43 +35,43 @@
         int64_t(*SendPrivateMessage)(int64_t, Message);
         // DeleteMessage 撤回消息
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#delete_msg-%E6%92%A4%E5%9B%9E%E6%B6%88%E6%81%AF
-        (*DeleteMessage)(int64_t);
+        void(*DeleteMessage)(int64_t);
         // GetMessage 获取消息
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#get_msg-%E8%8E%B7%E5%8F%96%E6%B6%88%E6%81%AF
         Message(*GetMessage)(int64_t);
         // SetGroupKick 群组踢人
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_kick-%E7%BE%A4%E7%BB%84%E8%B8%A2%E4%BA%BA
-        (*SetGroupKick)(int64_t, int64_t, int);
+        void(*SetGroupKick)(int64_t, int64_t, int);
         // SetGroupBan 群组单人禁言
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_ban-%E7%BE%A4%E7%BB%84%E5%8D%95%E4%BA%BA%E7%A6%81%E8%A8%80
-        (*SetGroupBan)(int64_t, int64_t, int64_t);
+        void(*SetGroupBan)(int64_t, int64_t, int64_t);
         // SetGroupWholeBan 群组全员禁言
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_whole_ban-%E7%BE%A4%E7%BB%84%E5%85%A8%E5%91%98%E7%A6%81%E8%A8%80
-        (*SetGroupWholeBan)(int64_t, int);
+        void(*SetGroupWholeBan)(int64_t, int);
         // SetGroupAdmin 群组设置管理员
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_whole_ban-%E7%BE%A4%E7%BB%84%E5%85%A8%E5%91%98%E7%A6%81%E8%A8%80
-        (*SetGroupAdmin)(int64_t, int64_t, int);
+        void(*SetGroupAdmin)(int64_t, int64_t, int);
         // SetGroupAnonymous 群组匿名
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_anonymous-%E7%BE%A4%E7%BB%84%E5%8C%BF%E5%90%8D
-        (*SetGroupAnonymous)(int64_t, int);
+        void(*SetGroupAnonymous)(int64_t, int);
         // SetGroupCard 设置群名片（群备注）
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_card-%E8%AE%BE%E7%BD%AE%E7%BE%A4%E5%90%8D%E7%89%87%E7%BE%A4%E5%A4%87%E6%B3%A8
-        (*SetGroupCard)(int64_t, int64_t, string);
+        void(*SetGroupCard)(int64_t, int64_t, string);
         // SetGroupName 设置群名
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_name-%E8%AE%BE%E7%BD%AE%E7%BE%A4%E5%90%8D
-        (*SetGroupName)(int64_t, string);
+        void(*SetGroupName)(int64_t, string);
         // SetGroupLeave 退出群组
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_leave-%E9%80%80%E5%87%BA%E7%BE%A4%E7%BB%84
-        (*SetGroupLeave)(int64_t, int);
+        void(*SetGroupLeave)(int64_t, int);
         // SetGroupSpecialTitle 设置群组专属头衔
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_special_title-%E8%AE%BE%E7%BD%AE%E7%BE%A4%E7%BB%84%E4%B8%93%E5%B1%9E%E5%A4%B4%E8%A1%94
-        (*SetGroupSpecialTitle)(int64_t, int64_t, string);
+        void(*SetGroupSpecialTitle)(int64_t, int64_t, string);
         // SetFriendAddRequest 处理加好友请求
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_friend_add_request-%E5%A4%84%E7%90%86%E5%8A%A0%E5%A5%BD%E5%8F%8B%E8%AF%B7%E6%B1%82
-        (*SetFriendAddRequest)(string, int, string);
+        void(*SetFriendAddRequest)(string, int, string);
         // SetGroupAddRequest 处理加群请求／邀请
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#set_group_add_request-%E5%A4%84%E7%90%86%E5%8A%A0%E7%BE%A4%E8%AF%B7%E6%B1%82%E9%82%80%E8%AF%B7
-        (*SetGroupAddRequest)(string, string, int, string);
+        void(*SetGroupAddRequest)(string, string, int, string);
         // GetGroupInfo 获取群信息
         // https://github.com/howmanybots/onebot/blob/master/v11/specs/api/public.md#get_group_info-%E8%8E%B7%E5%8F%96%E7%BE%A4%E4%BF%A1%E6%81%AF
         struct Group*(*GetGroupInfo)(int64_t, int);
@@ -82,7 +80,7 @@
 
         // SetGroupPortrait 设置群头像
         // https://github.com/Mrs4s/go-cqhttp/blob/master/docs/cqhttp.md#%E8%AE%BE%E7%BD%AE%E7%BE%A4%E5%A4%B4%E5%83%8F
-        (*SetGroupPortrait)(int64_t, string);
+        void(*SetGroupPortrait)(int64_t, string);
     };
 
     // Rule filter the event
